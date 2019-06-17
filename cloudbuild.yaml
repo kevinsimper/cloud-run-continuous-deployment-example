@@ -3,3 +3,5 @@ steps:
   args: ['build', '-t', 'gcr.io/cloud-run-cd-example/cloud-run-continuous-deployment-example:$SHORT_SHA', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/cloud-run-cd-example/cloud-run-continuous-deployment-example:$SHORT_SHA']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'cloud-run-continuous-deployment-example', '--image=gcr.io/cloud-run-cd-example/cloud-run-continuous-deployment-example:$SHORT_SHA', '--region=us-central1']
